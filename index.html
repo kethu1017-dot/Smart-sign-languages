@@ -1,191 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Smart Sign Language Communicator</title>
-
-<!-- MediaPipe -->
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<header class="topbar">
-    <div class="brand">
-        <div class="logo">🤟</div>
-        <div>
-            <h1>Smart Sign Language Communicator</h1>
-            <p>AI Based Communication System</p>
-        </div>
-    </div>
-
-    <div class="top-actions">
-        <select id="languageSelect" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="ta">தமிழ்</option>
-        </select>
-        <button class="home-btn" onclick="showPage('home')">⌂</button>
-    </div>
-</header>
-
-<div class="app-layout">
-    <aside class="sidebar">
-        <button onclick="showPage('home')" class="nav-btn active">🏠 Home</button>
-        <button onclick="showPage('camera')" class="nav-btn">📷 Live Camera</button>
-        <button onclick="showPage('upload')" class="nav-btn">🎥 Video Upload</button>
-        <button onclick="showPage('text')" class="nav-btn">💬 Text / Voice</button>
-    </aside>
-
-    <main class="content">
-
-        <!-- HOME -->
-        <section id="home" class="page active-page">
-            <div class="hero">
-                <div class="hero-badge">AI POWERED</div>
-                <h2>Smart Sign Language Communicator</h2>
-                <p>Breaking communication barriers with AI-powered sign language recognition.</p>
-
-                <div class="chips">
-                    <span>Detect</span>
-                    <span>Recognize</span>
-                    <span>Communicate</span>
-                </div>
-
-                <button class="primary-btn" onclick="showPage('camera')">
-                    Start Communication
-                </button>
-            </div>
-
-            <div class="cards">
-                <div class="card" onclick="showPage('camera')">
-                    <div class="card-icon">📷</div>
-                    <h3>Live Camera Detection</h3>
-                    <p>Detect sign gestures using your camera.</p>
-                </div>
-
-                <div class="card" onclick="showPage('upload')">
-                    <div class="card-icon">🎥</div>
-                    <h3>Video Upload</h3>
-                    <p>Upload a video and recognize gestures.</p>
-                </div>
-
-                <div class="card" onclick="showPage('text')">
-                    <div class="card-icon">💬</div>
-                    <h3>Text / Voice</h3>
-                    <p>Convert text or voice into sign output.</p>
-                </div>
-            </div>
-
-            <div class="flow">
-                <span>Sign Language</span>
-                <b>→</b>
-                <span>AI Recognition</span>
-                <b>→</b>
-                <span>Text</span>
-                <b>→</b>
-                <span>Voice</span>
-            </div>
-        </section>
-
-        <!-- CAMERA -->
-        <section id="camera" class="page">
-            <div class="section-title">
-                <h2>Live Camera Detection</h2>
-                <p>Show a hand gesture in front of the camera.</p>
-            </div>
-
-            <div class="camera-controls">
-                <button class="primary-btn" onclick="startCamera()">Start Camera</button>
-                <button class="secondary-btn" onclick="stopCamera()">Stop Camera</button>
-                <button class="secondary-btn" onclick="switchCamera()">Switch Camera</button>
-            </div>
-
-            <div class="camera-box">
-                <video id="cameraVideo" autoplay playsinline muted></video>
-                <canvas id="cameraCanvas"></canvas>
-            </div>
-
-            <div class="status-grid">
-                <div class="status-card">Hand Detection <strong id="handStatus">Ready</strong></div>
-                <div class="status-card">AI Recognition <strong id="aiStatus">Ready</strong></div>
-            </div>
-
-            <div class="result-card">
-                <h3>Detected Gesture</h3>
-                <div id="gestureResult">Waiting...</div>
-                <div id="tamilResult"></div>
-                <button class="voice-btn" onclick="speakResult()">🔊 Play Voice</button>
-            </div>
-
-            <div class="training-box">
-                <h3>30-Word AI Training</h3>
-                <select id="trainWord">
-                    <option>HELLO</option><option>YES</option><option>NO</option>
-                    <option>THANK YOU</option><option>HELP</option><option>I LOVE YOU</option>
-                    <option>PLEASE</option><option>MORE</option><option>STOP</option>
-                    <option>ALL DONE</option><option>GOOD</option><option>BAD</option>
-                    <option>LOVE</option><option>FRIEND</option><option>FAMILY</option>
-                    <option>MOTHER</option><option>FATHER</option><option>BROTHER</option>
-                    <option>SISTER</option><option>BOY</option><option>GIRL</option>
-                    <option>EAT</option><option>DRINK</option><option>WATER</option>
-                    <option>FOOD</option><option>HOME</option><option>SCHOOL</option>
-                    <option>COLLEGE</option><option>UNDERSTAND</option><option>WAIT</option>
-                </select>
-                <button class="primary-btn" onclick="captureTraining()">Capture Gesture</button>
-                <button class="secondary-btn" onclick="resetTraining()">Reset Training</button>
-                <p id="trainingStatus">Landmark profile is saved in your browser.</p>
-            </div>
-        </section>
-
-        <!-- VIDEO UPLOAD -->
-        <section id="upload" class="page">
-            <div class="section-title">
-                <h2>Video Upload</h2>
-                <p>Upload a sign-language video for recognition.</p>
-            </div>
-
-            <input type="file" id="videoInput" accept="video/*" onchange="handleVideoUpload(event)">
-            <div class="video-preview">
-                <video id="uploadedVideo" controls></video>
-            </div>
-
-            <div class="result-card">
-                <h3>Recognition Result</h3>
-                <div id="videoResult">No video selected.</div>
-                <button class="voice-btn" onclick="speakText(document.getElementById('videoResult').innerText)">
-                    🔊 Play Voice
-                </button>
-            </div>
-        </section>
-
-        <!-- TEXT / VOICE -->
-        <section id="text" class="page">
-            <div class="section-title">
-                <h2>Text / Voice</h2>
-                <p>Enter text or speak, then view the sign output.</p>
-            </div>
-
-            <textarea id="textInput" rows="5" placeholder="Type your message here..."></textarea>
-
-            <div class="text-controls">
-                <button class="primary-btn" onclick="textToSign()">Convert to Sign</button>
-                <button class="secondary-btn" onclick="startVoiceInput()">🎤 Voice Input</button>
-                <button class="voice-btn" onclick="speakText(document.getElementById('textInput').value)">🔊 Speak</button>
-            </div>
-
-            <div class="result-card">
-                <h3>Sign Output</h3>
-                <div id="signOutput" class="sign-output">Your sign output will appear here.</div>
-            </div>
-        </section>
-
-    </main>
-</div>
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+<header><div class="brand"><div class="logo">🤟</div><div><h1>Smart Sign Language Communicator</h1><p>AI Based Communication System</p></div></div><div><select id="languageSelect" onchange="changeLanguage()"><option value="en">English</option><option value="ta">தமிழ்</option></select><button onclick="showPage('home')">⌂</button></div></header>
+<div class="layout"><aside><button class="nav active" onclick="showPage('home')">🏠 Home</button><button class="nav" onclick="showPage('camera')">📷 Live Camera</button><button class="nav" onclick="showPage('upload')">🎥 Video Upload</button><button class="nav" onclick="showPage('text')">💬 Text / Voice</button></aside>
+<main>
+<section id="home" class="page active"><div class="hero"><small>AI POWERED</small><h2>Smart Sign Language Communicator</h2><p>Breaking communication barriers with AI-powered sign language recognition.</p><div class="chips"><span>Detect</span><span>Recognize</span><span>Communicate</span></div><button class="primary" onclick="showPage('camera')">Start Communication →</button></div><div class="cards"><div onclick="showPage('camera')"><b>📷</b><h3>Live Camera Detection</h3><p>Detect sign gestures using your camera.</p></div><div onclick="showPage('upload')"><b>🎥</b><h3>Video Upload</h3><p>Upload a sign-language video.</p></div><div onclick="showPage('text')"><b>💬</b><h3>Text / Voice</h3><p>Convert text or voice into sign output.</p></div></div><div class="flow">Sign Language → AI Recognition → Text → Voice</div></section>
+<section id="camera" class="page"><h2>Live Camera Detection</h2><p>Show a hand gesture in front of the camera.</p><div><button class="primary" onclick="startCamera()">Start Camera</button><button onclick="stopCamera()">Stop</button><button onclick="switchCamera()">Switch Camera</button></div><div class="camera"><video id="cameraVideo" autoplay playsinline muted></video><canvas id="cameraCanvas"></canvas></div><div class="result"><h3>Detected Gesture</h3><div id="gestureResult">Waiting...</div><div id="tamilResult"></div><p id="confidence">Confidence: --</p><button onclick="speakResult()">🔊 Play Voice</button></div></section>
+<section id="upload" class="page"><h2>Video Upload</h2><p>Upload a sign-language video.</p><input type="file" id="videoInput" accept="video/*" onchange="handleVideoUpload(event)"><video id="uploadedVideo" controls></video><div class="result"><h3>Recognition Result</h3><div id="videoResult">No video selected.</div></div></section>
+<section id="text" class="page"><h2>Text / Voice</h2><textarea id="textInput" rows="5" placeholder="Type your message here..."></textarea><div><button class="primary" onclick="textToSign()">Convert to Sign</button><button onclick="startVoiceInput()">🎤 Voice Input</button><button onclick="speakText(document.getElementById('textInput').value)">🔊 Speak</button></div><div class="result"><h3>Sign Output</h3><div id="signOutput">Your sign output will appear here.</div></div></section>
+</main></div>
+<script src="script.js"></script>
+</body></html>
