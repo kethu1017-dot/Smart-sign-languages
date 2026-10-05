@@ -1,2 +1,2 @@
 # Smart-sign-languages
-Ai based communication system 
+Ai based communication system
