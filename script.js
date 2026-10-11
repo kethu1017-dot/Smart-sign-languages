@@ -1,4 +1,3 @@
-
 /* Smart Sign Language Communicator - script.js */
 let stream = null;
 let facingMode = 'user';
