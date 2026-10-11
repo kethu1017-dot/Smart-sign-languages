@@ -1,147 +1,486 @@
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f3ff;color:#202040}
-header{min-height:72px;background:linear-gradient(135deg,#3226c8,#6131df,#9a42ef);color:white;display:flex;justify-content:space-between;align-items:center;padding:10px 20px}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{background:white;color:#5b35d5;border-radius:14px;padding:10px;font-size:25px}
-.brand h1{font-size:20px;margin:0}.brand p{margin:4px 0;font-size:12px}
-.layout{display:flex;min-height:calc(100vh - 72px)}
-aside{width:220px;background:white;padding:15px;box-shadow:2px 0 10px #ddd}
-aside button{display:block;width:100%;margin:7px 0;padding:12px;border:0;border-radius:10px;text-align:left;background:white;cursor:pointer}
-.active,.nav:hover{background:#eee9ff!important;color:#5931d4;font-weight:bold}
-main{flex:1;padding:28px;max-width:1200px;margin:auto}.page{display:none}
-.page.active{display:block}
-.hero{background:linear-gradient(135deg,#3226c8,#6131df,#9a42ef);color:white;border-radius:22px;padding:45px;text-align:center}
-.hero h2{font-size:36px}.chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px}
-.chips span{border:1px solid #ffffff66;padding:8px 15px;border-radius:20px}
-.primary{background:#6131df!important;color:white!important}
-.hero .primary{background:white!important;color:#5931d4!important}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-.cards>div,.result{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 18px #32267a12;cursor:pointer}
-.cards b{font-size:30px}.flow{background:white;margin-top:20px;padding:18px;border-radius:14px;text-align:center}
-.camera{position:relative;max-width:800px;margin:20px auto;background:#111;border-radius:15px;overflow:hidden}
-.camera video,.camera canvas{width:100%;display:block}.camera canvas{position:absolute;left:0;top:0}
-button,select{padding:10px 14px;border:0;border-radius:9px;margin:5px;cursor:pointer}
-textarea{width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-size:16px}
-#uploadedVideo{width:100%;max-width:800px;margin-top:15px;border-radius:15px}
-#gestureResult{font-size:30px;font-weight:bold;color:#6131df}
-#signOutput{font-size:30px;min-height:60px}@media(max-width:750px)
-{.layout{display:block}aside{width:100%;display:flex;overflow:auto}
- aside button{min-width:135px}.cards{grid-template-columns:1fr}
- .hero{padding:28px}.hero h2{font-size:28px}.brand h1{font-size:15px}}
 
-/* Mobile responsive improvements */
-
-html, body {
-  margin: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
+/* SMART SIGN LANGUAGE COMMUNICATOR */
+/* Responsive Design */
 
 * {
   box-sizing: border-box;
 }
 
-.content {
-  min-height: auto;
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
-.page.active,
-.page.active-page {
-  padding-top: 20px;
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f3ff;
+  color: #202040;
 }
 
-.camera-box,
-.video-preview {
+/* HEADER */
+
+header {
+  min-height: 72px;
+  background: linear-gradient(
+    135deg,
+    #3226c8,
+    #6131df,
+    #9a42ef
+  );
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.logo {
+  background: white;
+  color: #5b35d5;
+  border-radius: 14px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.brand p {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+/* MAIN LAYOUT */
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+  align-items: stretch;
+}
+
+/* SIDEBAR */
+
+aside {
+  flex: 0 0 220px;
+  background: white;
+  padding: 15px;
+  box-shadow: 2px 0 10px #ddd;
+}
+
+aside button {
+  display: block;
+  width: 100%;
+  margin: 7px 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  text-align: left;
+  background: white;
+  cursor: pointer;
+}
+
+aside .nav.active,
+aside .nav:hover {
+  background: #eee9ff !important;
+  color: #5931d4;
+  font-weight: bold;
+}
+
+/* CONTENT */
+
+main {
+  flex: 1;
+  min-width: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* HOME PAGE */
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #3226c8,
+    #6131df,
+    #9a42ef
+  );
+  color: white;
+  border-radius: 22px;
+  padding: 45px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 36px;
+}
+
+.chips {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.chips span {
+  border: 1px solid #ffffff66;
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+.primary {
+  background: #6131df !important;
+  color: white !important;
+}
+
+.hero .primary {
+  background: white !important;
+  color: #5931d4 !important;
+}
+
+/* CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.cards > div,
+.result {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 5px 18px #32267a12;
+}
+
+.cards > div {
+  cursor: pointer;
+}
+
+.cards b {
+  font-size: 30px;
+}
+
+.flow {
+  background: white;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+/* BUTTONS */
+
+button, select {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 9px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.action-buttons button {
+  margin: 0;
+  padding: 11px 16px;
+}
+
+/* LIVE CAMERA */
+
+.camera {
   position: relative;
   width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  background: #111;
+  border-radius: 15px;
   overflow: hidden;
-  border-radius: 14px;
 }
 
-.camera-box video,
-.video-preview video {
+.camera video {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 65vh;
-  object-fit: contain;
 }
 
-.camera-box canvas {
+.camera canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
 
-.video-actions,
-.camera-controls,
-.text-controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 12px 0;
+/* VIDEO UPLOAD */
+
+.video-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 15px;
 }
 
-.sign-output {
+#uploadedVideo {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  background: #111;
+  border-radius: 15px;
+}
+
+#videoInput {
+  max-width: 100%;
+}
+
+#videoResult {
+  font-size: 22px;
+  font-weight: bold;
+  color: #6131df;
+}
+
+/* RESULTS */
+
+.result {
+  margin-top: 15px;
+}
+
+#gestureResult {
+  font-size: 30px;
+  font-weight: bold;
+  color: #6131df;
+}
+
+#uploadTamil,
+#tamilResult,
+#signTamil {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* TEXT / VOICE */
+
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+#signOutput {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
+  min-height: 60px;
 }
 
-@media (max-width: 768px) {
-  .app-layout {
-    display: block;
+#signOutput img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 15px;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  aside {
+    flex-basis: 170px;
   }
 
-  .sidebar {
-    position: static;
+  main {
+    padding: 18px;
+  }
+
+  .cards {
+    gap: 12px;
+  }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+
+  header {
+    min-height: 65px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .brand {
+    gap: 7px;
+  }
+
+  .brand h1 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .brand p {
+    font-size: 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+    padding: 7px;
+  }
+
+  header select {
+    max-width: 85px;
+    padding: 7px 3px;
+    margin: 2px;
+  }
+
+  header button {
+    padding: 7px;
+    margin: 2px;
+  }
+
+  /* Sidebar becomes top navigation */
+
+  .layout {
+    display: block;
+    min-height: auto;
+  }
+
+  aside {
     width: 100%;
     min-height: auto;
     display: flex;
-    overflow-x: auto;
+    flex-direction: row;
     gap: 6px;
+    overflow-x: auto;
     padding: 8px;
+    box-shadow: 0 2px 8px #ddd;
+    scrollbar-width: thin;
   }
 
-  .nav-btn {
+  aside button {
     flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
     white-space: nowrap;
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 12px;
   }
 
-  .content {
+  /* Full width content */
+
+  main {
     width: 100%;
-    min-height: auto;
+    max-width: 100%;
     margin: 0;
     padding: 12px;
   }
 
-  .page.active,
-  .page.active-page {
-    padding-top: 8px;
+  .page.active {
+    padding-top: 0;
   }
+
+  .page h2 {
+    font-size: 22px;
+  }
+
+  /* Home */
 
   .hero {
     padding: 25px 15px;
+    border-radius: 16px;
+  }
+
+  .hero h2 {
+    font-size: 25px;
+  }
+
+  .chips {
+    margin: 15px 0;
   }
 
   .cards {
-    display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .section-title {
-    margin-top: 0;
+  .cards > div,
+  .result {
+    padding: 15px;
   }
 
-  textarea {
+  /* Camera and video */
+
+  .camera {
+    margin: 12px auto;
+  }
+
+  #uploadedVideo {
     width: 100%;
+    max-height: 55vh;
   }
 
-  .topbar h1 {
-    font-size: 15px;
+  .action-buttons {
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .action-buttons button {
+    flex: 1 1 auto;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  #gestureResult {
+    font-size: 25px;
+  }
+
+  #videoResult {
+    font-size: 20px;
+  }
+
+  #signOutput {
+    gap: 8px;
+  }
+
+  footer {
+    font-size: 12px;
   }
 }
