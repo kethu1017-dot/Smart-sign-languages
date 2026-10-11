@@ -355,3 +355,180 @@ function startVoiceInput() {
   recognition.onerror = event => alert('Voice recognition error: ' + event.error);
   recognition.start();
 }
+
+
+/* FULL ENGLISH / TAMIL WEBSITE TRANSLATION */
+
+const websiteTranslations = {
+  en: {
+    "AI Based Communication System": "AI Based Communication System",
+    "🏠 Home": "🏠 Home",
+    "📷 Live Camera": "📷 Live Camera",
+    "🎥 Video Upload": "🎥 Video Upload",
+    "💬 Text / Voice": "💬 Text / Voice",
+    "⚡ AI POWERED": "⚡ AI POWERED",
+    "AI POWERED": "AI POWERED",
+    "Breaking communication barriers with AI-powered sign language recognition.": "Breaking communication barriers with AI-powered sign language recognition.",
+    "Detect": "Detect",
+    "Recognize": "Recognize",
+    "Communicate": "Communicate",
+    "Start Communication →": "Start Communication →",
+    "Communication Modes": "Communication Modes",
+    "Live Camera Detection": "Live Camera Detection",
+    "Detect supported hand gestures using your camera.": "Detect supported hand gestures using your camera.",
+    "Video Upload": "Video Upload",
+    "Upload a gesture video and analyse hand movements.": "Upload a gesture video and analyse hand movements.",
+    "Text / Voice": "Text / Voice",
+    "Convert text or voice into sign images.": "Convert text or voice into sign images.",
+    "Sign Language → AI Recognition → Text → Voice": "Sign Language → AI Recognition → Text → Voice",
+    "📷 Live Camera Detection": "📷 Live Camera Detection",
+    "Show a supported hand gesture in front of your camera.": "Show a supported hand gesture in front of your camera.",
+    "📷 Start Camera": "📷 Start Camera",
+    "⏹ Stop Camera": "⏹ Stop Camera",
+    "🔄 Switch Camera": "🔄 Switch Camera",
+    "Detected Gesture": "Detected Gesture",
+    "Waiting...": "Waiting...",
+    "Confidence: --": "Confidence: --",
+    "Camera off": "Camera off",
+    "Waiting": "Waiting",
+    "🔊 Play Voice": "🔊 Play Voice",
+    "🎥 Video Upload": "🎥 Video Upload",
+    "Upload a sign-language video for basic hand gesture analysis.": "Upload a sign-language video for basic hand gesture analysis.",
+    "🔍 Analyse Video": "🔍 Analyse Video",
+    "⏹ Stop Analysis": "⏹ Stop Analysis",
+    "Recognition Result": "Recognition Result",
+    "No video selected.": "No video selected.",
+    "💬 Text / Voice": "💬 Text / Voice",
+    "Enter English words or use voice input to display corresponding sign images.": "Enter English words or use voice input to display corresponding sign images.",
+    "🤟 Convert to Sign": "🤟 Convert to Sign",
+    "🎤 Voice Input": "🎤 Voice Input",
+    "🔊 Speak": "🔊 Speak",
+    "Sign Output": "Sign Output",
+    "Your sign output will appear here.": "Your sign output will appear here.",
+    "Smart Sign Language Communicator © 2026": "Smart Sign Language Communicator © 2026"
+  },
+
+  ta: {
+    "AI Based Communication System": "செயற்கை நுண்ணறிவு அடிப்படையிலான தொடர்பு அமைப்பு",
+    "🏠 Home": "🏠 முகப்பு",
+    "📷 Live Camera": "📷 நேரடி கேமரா",
+    "🎥 Video Upload": "🎥 காணொளி பதிவேற்றம்",
+    "💬 Text / Voice": "💬 உரை / குரல்",
+    "⚡ AI POWERED": "⚡ செயற்கை நுண்ணறிவு",
+    "AI POWERED": "செயற்கை நுண்ணறிவு",
+    "Breaking communication barriers with AI-powered sign language recognition.": "செயற்கை நுண்ணறிவு மூலம் சைகை மொழியை அறிந்து தொடர்புத் தடைகளை நீக்குதல்.",
+    "Detect": "கண்டறிதல்",
+    "Recognize": "அடையாளம் காணுதல்",
+    "Communicate": "தொடர்பு கொள்ளுதல்",
+    "Start Communication →": "தொடர்பைத் தொடங்கு →",
+    "Communication Modes": "தொடர்பு முறைகள்",
+    "Live Camera Detection": "நேரடி கேமரா கண்டறிதல்",
+    "Detect supported hand gestures using your camera.": "கேமரா மூலம் ஆதரிக்கப்படும் கைச் சைகைகளைக் கண்டறியவும்.",
+    "Video Upload": "காணொளி பதிவேற்றம்",
+    "Upload a gesture video and analyse hand movements.": "சைகை காணொளியைப் பதிவேற்றி கை அசைவுகளைப் பகுப்பாய்வு செய்யவும்.",
+    "Text / Voice": "உரை / குரல்",
+    "Convert text or voice into sign images.": "உரை அல்லது குரலைச் சைகைப் படங்களாக மாற்றவும்.",
+    "Sign Language → AI Recognition → Text → Voice": "சைகை மொழி → AI அடையாளம் காணுதல் → உரை → குரல்",
+    "📷 Live Camera Detection": "📷 நேரடி கேமரா கண்டறிதல்",
+    "Show a supported hand gesture in front of your camera.": "கேமரா முன் ஆதரிக்கப்படும் கைச் சைகையைக் காட்டவும்.",
+    "📷 Start Camera": "📷 கேமராவைத் தொடங்கு",
+    "⏹ Stop Camera": "⏹ கேமராவை நிறுத்து",
+    "🔄 Switch Camera": "🔄 கேமராவை மாற்று",
+    "Detected Gesture": "கண்டறியப்பட்ட சைகை",
+    "Waiting...": "காத்திருக்கிறது...",
+    "Confidence: --": "நம்பகத்தன்மை: --",
+    "Camera off": "கேமரா அணைக்கப்பட்டுள்ளது",
+    "Waiting": "காத்திருக்கிறது",
+    "🔊 Play Voice": "🔊 குரலில் கேட்க",
+    "🎥 Video Upload": "🎥 காணொளி பதிவேற்றம்",
+    "Upload a sign-language video for basic hand gesture analysis.": "கைச் சைகைகளைப் பகுப்பாய்வு செய்ய காணொளியைப் பதிவேற்றவும்.",
+    "🔍 Analyse Video": "🔍 காணொளியைப் பகுப்பாய்வு செய்",
+    "⏹ Stop Analysis": "⏹ பகுப்பாய்வை நிறுத்து",
+    "Recognition Result": "அடையாளம் காணப்பட்ட முடிவு",
+    "No video selected.": "காணொளி தேர்ந்தெடுக்கப்படவில்லை.",
+    "💬 Text / Voice": "💬 உரை / குரல்",
+    "Enter English words or use voice input to display corresponding sign images.": "சைகைப் படங்களைக் காண ஆங்கில வார்த்தைகளை உள்ளிடவும் அல்லது குரலைப் பயன்படுத்தவும்.",
+    "🤟 Convert to Sign": "🤟 சைகையாக மாற்று",
+    "🎤 Voice Input": "🎤 குரல் உள்ளீடு",
+    "🔊 Speak": "🔊 பேசு",
+    "Sign Output": "சைகை வெளியீடு",
+    "Your sign output will appear here.": "உங்கள் சைகை வெளியீடு இங்கே தோன்றும்.",
+    "Smart Sign Language Communicator © 2026": "ஸ்மார்ட் சைகை மொழி தொடர்பாளர் © 2026"
+  }
+};
+
+// Store original English text
+const translationNodes = [];
+
+function setupWebsiteTranslation() {
+  const selectors = [
+    "header .brand p",
+    "aside .nav",
+    ".hero small",
+    ".hero p",
+    ".hero .chips span",
+    ".hero button",
+    "#home > h2",
+    ".cards h3",
+    ".cards p",
+    ".flow",
+    "#camera > h2",
+    "#camera > p",
+    "#camera .action-buttons button",
+    "#camera .result h3",
+    "#camera .result button",
+    "#upload > h2",
+    "#upload > p",
+    "#upload .action-buttons button",
+    "#upload .result h3",
+    "#text > h2",
+    "#text > p",
+    "#text .action-buttons button",
+    "#text .result h3",
+    "footer"
+  ];
+
+  document.querySelectorAll(selectors.join(",")).forEach(el => {
+    translationNodes.push({
+      element: el,
+      english: el.textContent.trim()
+    });
+  });
+}
+
+function applyWebsiteLanguage() {
+  const lang = document.getElementById("languageSelect").value;
+  const dictionary = websiteTranslations[lang] || websiteTranslations.en;
+
+  translationNodes.forEach(item => {
+    item.element.textContent =
+      dictionary[item.english] || item.english;
+  });
+
+  const input = document.getElementById("textInput");
+
+  if (input) {
+    input.placeholder = lang === "ta"
+      ? "உங்கள் செய்தியை இங்கே உள்ளிடவும்..."
+      : "Type your message here...";
+  }
+
+  document.documentElement.lang = lang;
+}
+
+// Keep existing changeLanguage functionality
+const previousChangeLanguage =
+  typeof changeLanguage === "function"
+    ? changeLanguage
+    : null;
+
+changeLanguage = function() {
+  if (previousChangeLanguage) {
+    previousChangeLanguage();
+  }
+
+  applyWebsiteLanguage();
+};
+
+setupWebsiteTranslation();
+applyWebsiteLanguage();
