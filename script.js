@@ -136,17 +136,52 @@ async function processVideo(session = cameraSession) {
   if (running && session === cameraSession) requestAnimationFrame(() => processVideo(session));
 }
 function extended(l,tip,pip) { return l[tip].y < l[pip].y - 0.015; }
+
 function classify(l) {
   if (!l) return null;
-  const index = extended(l,8,6), middle = extended(l,12,10);
-  const ring = extended(l,16,14), pinky = extended(l,20,18);
-  // These are approximate hand poses, not full sign-language recognition.
-  if (index && middle && ring && pinky) return 'STOP';
-  if (!index && !middle && !ring && !pinky) return 'YES';
-  if (index && middle && !ring && !pinky) return 'NO';
-  if (index && !middle && !ring && pinky) return 'I LOVE YOU';
+
+  const index = extended(l, 8, 6);
+  const middle = extended(l, 12, 10);
+  const ring = extended(l, 16, 14);
+  const pinky = extended(l, 20, 18);
+
+  const palmSize = Math.hypot(
+    l[0].x - l[9].x,
+    l[0].y - l[9].y
+  );
+
+  if (palmSize < 0.03) return null;
+
+  const thumbRaised =
+    (l[4].y < l[2].y - palmSize * 0.3) &&
+    (l[4].y < l[3].y);
+
+  const fingersClosed =
+    !index && !middle && !ring && !pinky;
+
+  if (fingersClosed && thumbRaised) {
+    return "YES";
+  }
+
+  if (fingersClosed && !thumbRaised) {
+    return null;
+  }
+
+  if (index && middle && ring && pinky) {
+    return "STOP";
+  }
+
+  if (index && middle && !ring && !pinky) {
+    return "NO";
+  }
+
+  if (index && !middle && !ring && pinky) {
+    return "I LOVE YOU";
+  }
+
   return null;
 }
+
 function drawHandResults(result, canvasId, videoId) {
   const canvas = $(canvasId), video = $(videoId);
   if (!canvas || !video) return;
