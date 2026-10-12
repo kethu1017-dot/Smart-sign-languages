@@ -590,3 +590,71 @@ footer {
     border-width: 2px;
   }
 }
+
+
+/* FINAL PURPLE THEME */
+
+body {
+  background: #eeeaff !important;
+}
+
+header {
+  background: linear-gradient(
+    110deg,
+    #3020ad,
+    #6635dd,
+    #9b4cf0
+  ) !important;
+}
+
+aside {
+  background: #24205d !important;
+}
+
+aside button {
+  background: transparent !important;
+  color: white !important;
+}
+
+aside .nav.active,
+aside .nav:hover {
+  background: #7048e8 !important;
+  color: white !important;
+}
+
+.hero {
+  background: linear-gradient(
+    125deg,
+    #3425bd,
+    #7040e3,
+    #a456f3
+  ) !important;
+}
+
+.cards > div {
+  border: 1px solid #e2d8ff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px #3824a020;
+}
+
+.result {
+  border-radius: 20px;
+  background: white;
+}
+
+.primary {
+  background: #7040e3 !important;
+  color: white !important;
+}
+
+.hero .primary {
+  background: white !important;
+  color: #5130ce !important;
+}
+
+@media (max-width: 768px) {
+  aside {
+    background: #24205d !important;
+  }
+}
+
