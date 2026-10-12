@@ -10,7 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -334,14 +335,24 @@ button {
 
     <div id="tamilResult"></div>
 
-    <p id="confidence">
-      Confidence: --
-    </p>
-
     <p id="handStatus">
       Camera off
     </p>
+    
+    <p id="faceStatus">Face: Camera off</p>
+    <p id="bodyStatus">Body: Camera off</p>
 
+    <select id="cameraOutputLang"
+        onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="ta">தமிழ்</option>
+    </select>
+
+   <h3>Sentence Output</h3>
+   <div id="cameraSentence"></div>
+
+   <button onclick="clearCamera()">🗑 Clear</button>
+    
     <p id="aiStatus">
       Waiting
     </p>
@@ -409,6 +420,17 @@ button {
 
     <div id="uploadTamil"></div>
 
+    <select id="uploadOutputLang"
+        onchange="changeLanguage()">
+  <option value="en">English</option>
+  <option value="ta">தமிழ்</option>
+</select>
+
+<h3>Sentence Output</h3>
+<div id="uploadSentence"></div>
+
+<button onclick="clearUpload()">🗑 Clear</button>
+
   </div>
 
 </section>
@@ -458,6 +480,8 @@ button {
 
     <div id="signTamil"></div>
 
+    <button onclick="clearText()">🗑 Clear</button>
+
   </div>
 
 </section>
@@ -472,6 +496,7 @@ button {
 
 <!-- MAIN JAVASCRIPT -->
 <script src="script.js"></script>
+<script src="gesture-upgrade.js?v=1"></script>
 
 </body>
 </html>
